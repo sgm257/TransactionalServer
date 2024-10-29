@@ -69,6 +69,8 @@ public class Lock implements LockTypes {
             // if there are requestors
             if(!lockHolders.isEmpty())
             {
+                System.out.println("\nTransaction #" + transaction.getTransactionID() + " aborting transaction");
+                
                 // throw transaction abortion exception
                 throw new TransactionAbortedException();
             }
@@ -96,6 +98,7 @@ public class Lock implements LockTypes {
             // ...
 
             // set before image (part of transaction)
+            transaction.addBeforeImage(account, account._read());
         }
 
         // set the lock - implementation of pseudocode from the book
@@ -104,10 +107,13 @@ public class Lock implements LockTypes {
             // ...
 
             // set current lock type to new lock type
+            currentLockType = newLockType;
 
             // add lock to transaction
+            transaction.addLock(this);
 
             // add the transaction to the lock holders list
+            lockHolders.add(transaction);
         } 
         // this transaction is not one of the transactions already holding this lock, so it can only be a shared lock
         else if (!lockHolders.contains(transaction)) {
@@ -116,8 +122,10 @@ public class Lock implements LockTypes {
             // ...
 
             // add lock to transaction
+            transaction.addLock(this);
 
             // add the transaction to the lock holders list
+            lockHolders.add(transaction);
         } 
         // when the above two checks fail, this transaction is the lock holder
         // we now check if the transaction is the sole lock holder and if the lock needs to be promoted        
@@ -125,6 +133,7 @@ public class Lock implements LockTypes {
             // ...
 
             // set current lock type to new lock type (write lock)
+            currentLockType = newLockType;
         } 
         // if all the above didn't fire, we are in either of three cases:
         // - this transaction tries to set a read  lock on a read  lock it holds - possibly with other transactions

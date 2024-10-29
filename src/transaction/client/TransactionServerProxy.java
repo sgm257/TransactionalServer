@@ -87,18 +87,31 @@ public class TransactionServerProxy implements MessageTypes{
     public int closeTransaction() {
         
         // ...
+        int returnStatus;
 
-        // make message
-        Message message = new Message(CLOSE_TRANSACTION, transactionID);
+        try
+        {
+            // make message
+            Message message = new Message(CLOSE_TRANSACTION, transactionID);
 
-        // send message
-        writeToNet.writeObject(message);
+            // send message
+            writeToNet.writeObject(message);
 
-        // receive status response
-        int returnStatus = readFromNet.readObject();
+            System.out.println("\nTransaction #" + transactionID + " sent message to server"); 
 
-        // close streams
-        dbConnection.close();
+            // receive status response
+            returnStatus = (int)readFromNet.readObject();
+
+            // close streams
+            dbConnection.close();
+
+            System.out.println("\nTransaction #" + transactionID + " closed connection");
+        }
+        catch(Exception e)
+        {
+            // cry about it I guess
+            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+        }
         
         return returnStatus;
     }
@@ -117,10 +130,18 @@ public class TransactionServerProxy implements MessageTypes{
 
         // ...
 
-        // send message to server and receive response
-        writeToNet.writeObject(message);
+        try
+        {
+            // send message to server and receive response
+            writeToNet.writeObject(message);
 
-        message = readFromNet.readObject();
+            message = (Message)readFromNet.readObject();
+        }
+        catch(Exception e)
+        {
+            // cry about it I guess
+            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+        }        
         
         if(message.getType() == READ_REQUEST_RESPONSE)
         {
@@ -145,10 +166,17 @@ public class TransactionServerProxy implements MessageTypes{
         Message message = new Message(WRITE_REQUEST, content);
 
         // ...
-
-        // send message to server and receive response
-        writeToNet.writeObject(message);
-        message = readFromNet.readObject();
+        try
+        {
+            // send message to server and receive response
+            writeToNet.writeObject(message);
+            message = readFromNet.readObject();
+        }
+        catch(Exception e)
+        {
+            // cry about it I guess
+            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+        }
 
         if(message.getType() == TRANSACTION_ABORTED)
         {

@@ -133,11 +133,13 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // ...
 
                         // create a transaction based on the info received from the message
-                        Transaction t = new Transaction();
+                        Transaction t = new Transaction((int)message.getContent());
 
                         // add transaction to running transactions for logging purposes
+                        runningTransactions.add(t);
 
                         // log creation
+                        transaction.log("Transaction created");
                         
                         break;
 
@@ -147,11 +149,24 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         // ...
 
+                        int i = 0;
+                        Transaction t;
+                        
+                        // search running transaction list for right transaction
+                        do
+                        {
+                            t = runningTransactions.get(i);
+                        }
+                        while(t.transactionID != (int)message.getContent());
+
                         // use lock manager to release all locks
+                        TransactionServer.lockManager.unLock(t);
 
                         // remove it from running transactions and move it to committed transactions
+                        runningTransactions.remove(t);
 
                         // send message to client that transaction committed
+                        committedTransactions.add(t);
 
                         break;
 
@@ -162,8 +177,11 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // ...
 
                         // get content of message
+                        int accountNum = (int)message.getContent();
 
-                        // log it                            
+                        // log it   
+                        
+                        // TODO where does "transaction" variable come from?
                         
                         try {
                             // ==================================================================>
@@ -172,23 +190,32 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             
                             // ...
 
-                            // read balance
-
                             // send read request response back to client
+                                // send back transaction ID?? TODO
+                            writeToNet.writeObject(new Message(READ_REQUEST_RESPONSE, transaction.transactionID));
                                                     
                         } catch (TransactionAbortedException ex) {
 
                             // ...
 
                             // write before image to accounts
+                            transaction.beforeImage.forEach( (a, b) ->
+                            
+                               { TransactionServer.accountManager.getAccount(a)._write(b); } 
+
+                            );
 
                             // low-level write to the accounts what the balance was before
 
                             // release all acquired locks (lock manager)
+                            TransactionServer.lockManager.unLock(transaction);
 
                             // send message to client stating it aborted
+                                // TODO idk what to return here...
+                            writeToNet.writeObject(new Message(TRANSACTION_ABORTED, transaction.transactionID));
 
                             // close streams
+                            client.close();
                             
                         }
 
@@ -210,9 +237,9 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                             // ...
 
-                            // write to balance
-
                             // send write request response back to client
+                                // TODO again what do i return here... as the message content
+                            writeToNet.writeObject(new Message(WRITE_REQUEST_RESPONSE, transaction.transactionID));
                             
 
                         } catch (TransactionAbortedException ex) {
@@ -220,15 +247,23 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // ...
 
                             // write before image to accounts
+                            transaction.beforeImage.forEach( (a, b) ->
+                            
+                                { TransactionServer.accountManager.getAccount(a)._write(b); }
+
+                            );
 
                             // low-level write to the accounts what the balance was before
 
                             // release all acquired locks (lock manager)
+                            TransactionServer.lockManager.unLock(transaction);
 
                             // send message to client stating it aborted
+                                // TODO same problem...
+                            writeToNet.writeObject(new Message(TRANSACTION_ABORTED, transaction.transactionID));
 
                             // close streams
-
+                            client.close();
                         }
 
 
