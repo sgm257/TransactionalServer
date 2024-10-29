@@ -65,6 +65,13 @@ public class Lock implements LockTypes {
             // run through all the locks that this transaction has
             // look at each lock's lock requestors. if not empty, this transaction needs to abort
             // ...
+
+            // if there are requestors
+            if(!lockHolders.isEmpty())
+            {
+                // throw transaction abortion exception
+                throw new TransactionAbortedException();
+            }
             
             lockRequestors.add(transaction);
 
@@ -87,22 +94,39 @@ public class Lock implements LockTypes {
         // save the before image in transaction, if not already there
         if (currentLockType != WRITE_LOCK && newLockType == WRITE_LOCK) {
             // ...
+
+            // set before image (part of transaction)
         }
 
         // set the lock - implementation of pseudocode from the book
         // nobody holding the lock, just go ahead
         if (lockHolders.isEmpty()) {
             // ...
-        } // this transaction is not one of the transactions already holding this lock, so it can only be a shared lock
+
+            // set current lock type to new lock type
+
+            // add lock to transaction
+
+            // add the transaction to the lock holders list
+        } 
+        // this transaction is not one of the transactions already holding this lock, so it can only be a shared lock
         else if (!lockHolders.contains(transaction)) {
             // another transaction holds the lock (i.e. read lock, otherwise we would not have got here)
             // so just share the (read) lock
             // ...
-        } // when the above two checks fail, this transaction is a lock holder
+
+            // add lock to transaction
+
+            // add the transaction to the lock holders list
+        } 
+        // when the above two checks fail, this transaction is the lock holder
         // we now check if the transaction is the sole lock holder and if the lock needs to be promoted        
         else if (currentLockType == READ_LOCK && newLockType == WRITE_LOCK) {
             // ...
-        } // if all the above didn't fire, we are in either of three cases:
+
+            // set current lock type to new lock type (write lock)
+        } 
+        // if all the above didn't fire, we are in either of three cases:
         // - this transaction tries to set a read  lock on a read  lock it holds - possibly with other transactions
         // - this transaction tries to set a read  lock on a write lock it holds
         // - this transaction tries to set a write lock on a write lock it holds
@@ -148,6 +172,21 @@ public class Lock implements LockTypes {
      */
     private boolean isConflict(Transaction transaction, int newLockType) {
         // ...
+
+        // returns true if there is a conflict
+
+        // if there are no lock holders, or we are the sole lock holder, or we are changing from a read lock to a read lock
+        if(lockHolders.isEmpty() || 
+           (lockHolders.contains(transaction) && lockHolders.size() == 1) ||
+           (currentLockType == READ_LOCK && newLockType == READ_LOCK))
+        {
+            return false;
+        }
+        // else there is a conflict
+        else
+        {
+            return true;
+        }
     }
 
     /**

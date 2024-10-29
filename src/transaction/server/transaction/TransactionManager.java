@@ -131,6 +131,13 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                     // -------------------------------------------------------------------------------------------
 
                         // ...
+
+                        // create a transaction based on the info received from the message
+                        Transaction t = new Transaction();
+
+                        // add transaction to running transactions for logging purposes
+
+                        // log creation
                         
                         break;
 
@@ -140,6 +147,11 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         // ...
 
+                        // use lock manager to release all locks
+
+                        // remove it from running transactions and move it to committed transactions
+
+                        // send message to client that transaction committed
 
                         break;
 
@@ -148,6 +160,10 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                     // -------------------------------------------------------------------------------------------
 
                         // ...
+
+                        // get content of message
+
+                        // log it                            
                         
                         try {
                             // ==================================================================>
@@ -155,10 +171,24 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // <==================================================================
                             
                             // ...
+
+                            // read balance
+
+                            // send read request response back to client
                                                     
                         } catch (TransactionAbortedException ex) {
 
                             // ...
+
+                            // write before image to accounts
+
+                            // low-level write to the accounts what the balance was before
+
+                            // release all acquired locks (lock manager)
+
+                            // send message to client stating it aborted
+
+                            // close streams
                             
                         }
 
@@ -179,11 +209,25 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // <===================================================================================
 
                             // ...
+
+                            // write to balance
+
+                            // send write request response back to client
                             
 
                         } catch (TransactionAbortedException ex) {
 
                             // ...
+
+                            // write before image to accounts
+
+                            // low-level write to the accounts what the balance was before
+
+                            // release all acquired locks (lock manager)
+
+                            // send message to client stating it aborted
+
+                            // close streams
 
                         }
 

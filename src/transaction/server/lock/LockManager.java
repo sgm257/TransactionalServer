@@ -18,7 +18,7 @@ public class LockManager implements LockTypes
     public LockManager(boolean applyLocking) 
     {
         locks = new HashMap<>();
-        this.applyLocking = applyLocking;
+        LockManager.applyLocking = applyLocking;
     }
 
     

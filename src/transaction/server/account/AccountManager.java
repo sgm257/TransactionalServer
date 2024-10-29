@@ -51,7 +51,7 @@ public class AccountManager implements LockTypes
         (TransactionServer.lockManager).lock(account, transaction, READ_LOCK);
         
         // the above call will likely wait (if not deadlock), until it continues here
-        return (getAccount(accountNumber))._read();
+        return account._read();
     }
     
     
