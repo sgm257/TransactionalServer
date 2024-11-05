@@ -53,19 +53,16 @@ public class TransactionServerProxy implements MessageTypes{
             writeToNet = new ObjectOutputStream(dbConnection.getOutputStream());
             readFromNet = new ObjectInputStream(dbConnection.getInputStream());
 
-            // increment transaction id
-            transactionID++;
-
-            System.out.println("\nTransaction #" + transactionID + " streams opened");
-
             // make message
-            Message message = new Message(OPEN_TRANSACTION, transactionID);
+            Message message = new Message(OPEN_TRANSACTION);
 
             // send message
             writeToNet.writeObject(message);
 
             // read response message
-            message  = (Message)readFromNet.readObject(); // TODO ok now what do I do with this
+            message = (Message)readFromNet.readObject(); 
+
+            transactionID = (int)message.getContent();
 
             System.out.println("\nTransaction #" + transactionID + " received " + message.getType() + " message");
         }
@@ -87,7 +84,7 @@ public class TransactionServerProxy implements MessageTypes{
     public int closeTransaction() {
         
         // ...
-        int returnStatus;
+        int returnStatus = -1;
 
         try
         {
@@ -143,9 +140,11 @@ public class TransactionServerProxy implements MessageTypes{
             System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
         }        
         
+        // return balance
         if(message.getType() == READ_REQUEST_RESPONSE)
         {
-            return (Integer) message.getContent();        }
+            return (Integer) message.getContent();        
+        }
         else
         {
             throw new TransactionAbortedException();
@@ -170,7 +169,7 @@ public class TransactionServerProxy implements MessageTypes{
         {
             // send message to server and receive response
             writeToNet.writeObject(message);
-            message = readFromNet.readObject();
+            message = (Message)readFromNet.readObject();
         }
         catch(Exception e)
         {

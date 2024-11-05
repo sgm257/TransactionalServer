@@ -133,10 +133,14 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // ...
 
                         // create a transaction based on the info received from the message
-                        Transaction t = new Transaction((int)message.getContent());
+                        transaction = new Transaction(transactionIdCounter);
+
+                        transactionIdCounter++;
 
                         // add transaction to running transactions for logging purposes
-                        runningTransactions.add(t);
+                        runningTransactions.add(transaction);
+
+                        // send transaction ID back to client
 
                         // log creation
                         transaction.log("Transaction created");
@@ -149,24 +153,14 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         // ...
 
-                        int i = 0;
-                        Transaction t;
-                        
-                        // search running transaction list for right transaction
-                        do
-                        {
-                            t = runningTransactions.get(i);
-                        }
-                        while(t.transactionID != (int)message.getContent());
-
                         // use lock manager to release all locks
-                        TransactionServer.lockManager.unLock(t);
+                        TransactionServer.lockManager.unLock(transaction);
 
                         // remove it from running transactions and move it to committed transactions
-                        runningTransactions.remove(t);
+                        runningTransactions.remove(transaction);
 
                         // send message to client that transaction committed
-                        committedTransactions.add(t);
+                        committedTransactions.add(transaction);
 
                         break;
 
@@ -177,12 +171,10 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // ...
 
                         // get content of message
-                        int accountNum = (int)message.getContent();
+                        int accountNum = (Integer)message.getContent();
 
                         // log it   
-                        
-                        // TODO where does "transaction" variable come from?
-                        
+                                                
                         try {
                             // ==================================================================>
                             balance = TransactionServer.accountManager.read(accountNumber, transaction);
@@ -190,13 +182,19 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             
                             // ...
 
-                            // send read request response back to client
-                                // send back transaction ID?? TODO
-                            writeToNet.writeObject(new Message(READ_REQUEST_RESPONSE, transaction.transactionID));
+                            try
+                            {
+                               // send read request response back to client
+                                writeToNet.writeObject(new Message(READ_REQUEST_RESPONSE, balance));
+                            }
+                            catch(Exception e)
+                            {
+                                transaction.log("[TransactionManager - read request] Error sending read request response message");
+                            }
                                                     
                         } catch (TransactionAbortedException ex) {
 
-                            // ...
+                            // ...`
 
                             // write before image to accounts
                             transaction.beforeImage.forEach( (a, b) ->
@@ -210,15 +208,19 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // release all acquired locks (lock manager)
                             TransactionServer.lockManager.unLock(transaction);
 
-                            // send message to client stating it aborted
-                                // TODO idk what to return here...
-                            writeToNet.writeObject(new Message(TRANSACTION_ABORTED, transaction.transactionID));
+                            try
+                            {
+                               // send message to client stating it aborted
+                                writeToNet.writeObject(new Message(TRANSACTION_ABORTED));
 
-                            // close streams
-                            client.close();
-                            
+                                // close streams
+                                client.close();
+                            }
+                            catch(Exception e)
+                            {
+                                transaction.log("[TransactionManager - read request] Error sending abortion warning");
+                            }
                         }
-
 
                         break;
 
@@ -237,10 +239,15 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                             // ...
 
-                            // send write request response back to client
-                                // TODO again what do i return here... as the message content
-                            writeToNet.writeObject(new Message(WRITE_REQUEST_RESPONSE, transaction.transactionID));
-                            
+                            try
+                            {
+                                // send write request response back to client
+                                writeToNet.writeObject(new Message(WRITE_REQUEST_RESPONSE));
+                            }
+                            catch(Exception e)
+                            {
+                                transaction.log("[TransactionManager - write request] Error sending write request response message");
+                            }
 
                         } catch (TransactionAbortedException ex) {
 
@@ -258,12 +265,18 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // release all acquired locks (lock manager)
                             TransactionServer.lockManager.unLock(transaction);
 
-                            // send message to client stating it aborted
-                                // TODO same problem...
-                            writeToNet.writeObject(new Message(TRANSACTION_ABORTED, transaction.transactionID));
+                            try
+                            {
+                                // send message to client stating it aborted
+                                writeToNet.writeObject(new Message(TRANSACTION_ABORTED, transaction.transactionID));
 
-                            // close streams
-                            client.close();
+                                // close streams
+                                client.close();
+                            }
+                            catch(Exception e)
+                            {
+                                transaction.log("[TransactionManager - write request] Error sending abortion warning");
+                            }
                         }
 
 

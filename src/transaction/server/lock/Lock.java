@@ -98,7 +98,7 @@ public class Lock implements LockTypes {
             // ...
 
             // set before image (part of transaction)
-            transaction.addBeforeImage(account, account._read());
+            transaction.addBeforeImage(account.getNumber(), account._read());
         }
 
         // set the lock - implementation of pseudocode from the book
