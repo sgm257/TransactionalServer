@@ -238,6 +238,6 @@ public class TransactionClient implements Runnable {
      * @param args
      */
     public static void main(String[] args) {
-        (new TransactionClient("../../config/TransactionClient.properties", "../../config/TransactionServer.properties")).run();
+        (new TransactionClient("/root/distributedSystems/TransactionalServer/src/config/TransactionClient.properties", "/root/distributedSystems/TransactionalServer/src/config/TransactionServer.properties")).run();
     }
 }

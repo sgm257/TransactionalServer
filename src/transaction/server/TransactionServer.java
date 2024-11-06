@@ -235,12 +235,12 @@ public class TransactionServer implements Runnable
      * main()
      * @param args 
      */
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
         if (args.length == 1) {
             new TransactionServer(args[0]).run();
         } else {
-            new TransactionServer("../../config/TransactionServer.properties").run();
+            new TransactionServer("/root/distributedSystems/TransactionalServer/src/config/TransactionServer.properties").run();
         }
     }
 }

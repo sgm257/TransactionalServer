@@ -60,7 +60,7 @@ public class TransactionServerProxy implements MessageTypes{
             writeToNet.writeObject(message);
 
             // read response message
-            message = (Message)readFromNet.readObject(); 
+            message = (Message)readFromNet.readObject();
 
             transactionID = (int)message.getContent();
 
