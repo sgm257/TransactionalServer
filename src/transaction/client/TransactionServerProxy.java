@@ -62,14 +62,14 @@ public class TransactionServerProxy implements MessageTypes{
             // read response message
             message = (Message)readFromNet.readObject();
 
-            transactionID = (int)message.getContent();
-
-            System.out.println("\nTransaction #" + transactionID + " received " + message.getType() + " message");
+            transactionID = (Integer)message.getContent();
+            //transactionID++;
         }
         catch(Exception e)
         {
             // cry about it I guess
-            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+            System.out.println("\n[openTransaction] Transaction #" + transactionID + " failed to open streams or send message or receive message");
+            System.exit(0); // TODO remove, temporarily here for testing purposes 
         }
         
         return transactionID;
@@ -107,7 +107,7 @@ public class TransactionServerProxy implements MessageTypes{
         catch(Exception e)
         {
             // cry about it I guess
-            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+            System.out.println("\n[closeTransaction] Transaction #" + transactionID + " failed to open streams or send message or receive message"); 
         }
         
         return returnStatus;
@@ -137,7 +137,7 @@ public class TransactionServerProxy implements MessageTypes{
         catch(Exception e)
         {
             // cry about it I guess
-            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+            System.out.println("\n[read] Transaction #" + transactionID + " failed to open streams or send message or receive message"); 
         }        
         
         // return balance
@@ -174,7 +174,7 @@ public class TransactionServerProxy implements MessageTypes{
         catch(Exception e)
         {
             // cry about it I guess
-            System.out.println("\nTransaction #" + transactionID + " failed to open streams or send message or receive message"); 
+            System.out.println("\n[write] Transaction #" + transactionID + " failed to open streams or send message or receive message"); 
         }
 
         if(message.getType() == TRANSACTION_ABORTED)

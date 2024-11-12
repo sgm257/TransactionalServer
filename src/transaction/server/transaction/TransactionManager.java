@@ -111,13 +111,20 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
         @Override
         public void run() {
+            String log;
+            
             // loop is left when transaction closes
             while (keepgoing) {
                 // reading message
                 try {
                     message = (Message) readFromNet.readObject();
-                } catch (IOException | ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) { //TODO server is shutting down here... what exception is it getting??
                     System.out.println("[TransactionManagerWorker.run] Client shut down, shutting down as well ...");
+
+                    e.printStackTrace();
+  
+                    // Prints what exception has been thrown 
+                    System.out.println(e);
 
                     // bail out
                     TransactionServer.shutDown();
@@ -140,10 +147,21 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // add transaction to running transactions for logging purposes
                         runningTransactions.add(transaction);
 
-                        // send transaction ID back to client
+                        // TODO send transaction ID back to client yes
+                        try
+                        {
+                            // send read request response back to client
+                            writeToNet.writeObject(new Message(OPEN_TRANSACTION, transaction.getTransactionID()));
+                        }
+                        catch(Exception e)
+                        {
+                            transaction.log("[TransactionManager - open transaction] Error sending open transaction message");
+                        }
 
                         // log creation
-                        transaction.log("Transaction created");
+                        log = String.format("Transaction #%d created", transaction.getTransactionID());
+
+                        transaction.log(log);
                         
                         break;
 
@@ -158,9 +176,22 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         // remove it from running transactions and move it to committed transactions
                         runningTransactions.remove(transaction);
+                        committedTransactions.add(transaction);
+
+                        log = String.format("Transaction #%d closed", transaction.getTransactionID());
+
+                        transaction.log(log);
 
                         // send message to client that transaction committed
-                        committedTransactions.add(transaction);
+                        try
+                        {
+                            // send read request response back to client
+                            writeToNet.writeObject(new Message(TRANSACTION_COMMITTED));
+                        }
+                        catch(Exception e)
+                        {
+                            transaction.log("[TransactionManager - close transaction] Error sending close transaction message");
+                        }
 
                         break;
 
@@ -172,8 +203,6 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         // get content of message
                         int accountNum = (Integer)message.getContent();
-
-                        // log it   
                                                 
                         try {
                             // ==================================================================>
@@ -181,6 +210,9 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                             // <==================================================================
                             
                             // ...
+                            log = String.format("Transaction #%d processing read request", transaction.getTransactionID());
+
+                            transaction.log(log);
 
                             try
                             {
@@ -196,10 +228,16 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                             // ...`
 
+                            log = String.format("Transaction #%d aborted", transaction.getTransactionID());
+
+                            transaction.log(log);
+                            
+                            keepgoing = false;
+
                             // write before image to accounts
                             transaction.beforeImage.forEach( (a, b) ->
                             
-                               { TransactionServer.accountManager.getAccount(a)._write(b); } 
+                               { TransactionServer.accountManager.getAccount(a)._write(b); }
 
                             );
 
@@ -239,6 +277,10 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                             // ...
 
+                            log = String.format("Transaction #%d processing write request", transaction.getTransactionID());
+
+                            transaction.log(log);
+
                             try
                             {
                                 // send write request response back to client
@@ -252,6 +294,12 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         } catch (TransactionAbortedException ex) {
 
                             // ...
+
+                            log = String.format("Transaction #%d aborted", transaction.getTransactionID());
+
+                            transaction.log(log);
+                            
+                            keepgoing = false;
 
                             // write before image to accounts
                             transaction.beforeImage.forEach( (a, b) ->
@@ -289,6 +337,8 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // client sent shutdown message, tell the server
                         TransactionServer.shutDown();
 
+                        transaction.log("Shutting down...");
+
                         // bail out
                         keepgoing = false;
 
@@ -300,6 +350,8 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         System.out.println("[TransactionManagerWorker.run] Warning: Message type not implemented");
                 }
+
+                System.out.println("End loop\n");
             }
         }
     }
