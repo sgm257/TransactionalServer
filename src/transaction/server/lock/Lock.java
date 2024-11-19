@@ -108,9 +108,7 @@ public class Lock implements LockTypes {
         if (lockHolders.isEmpty()) {
             // ...
 
-            String log = String.format("Transaction #%d adding lock", transaction.getTransactionID());
-
-            transaction.log(log);
+            transaction.log("adding lock");
 
             // set current lock type to new lock type
             currentLockType = newLockType;
@@ -127,9 +125,7 @@ public class Lock implements LockTypes {
             // so just share the (read) lock
             // ...
 
-            String log = String.format("Transaction #%d adding lock", transaction.getTransactionID());
-
-            transaction.log(log);
+            transaction.log("adding lock");
 
             // add lock to transaction
             transaction.addLock(this);
@@ -141,10 +137,7 @@ public class Lock implements LockTypes {
         // we now check if the transaction is the sole lock holder and if the lock needs to be promoted        
         else if (currentLockType == READ_LOCK && newLockType == WRITE_LOCK) {
             // ...
-
-            String log = String.format("Transaction #%d upgrading lock", transaction.getTransactionID());
-
-            transaction.log(log);
+            transaction.log("upgrading lock");
 
             // set current lock type to new lock type (write lock)
             currentLockType = newLockType;

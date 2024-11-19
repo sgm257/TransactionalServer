@@ -105,6 +105,7 @@ public class TransactionClient implements Runnable {
         try {
             dbConnection = new Socket(host, port);
             writeToNet = new ObjectOutputStream(dbConnection.getOutputStream());
+            writeToNet.flush();
             writeToNet.writeObject(new Message(SHUTDOWN, null));
             dbConnection.close();
         } catch (IOException ex) {
@@ -163,7 +164,7 @@ public class TransactionClient implements Runnable {
                 if (priorTransactionID == 0) {
                     System.out.println("Transaction #" + transactionID + " started, transfer $" + amount + ": " + accountFrom + "->" + accountTo);
                 } else {
-                    System.out.println("\t\tPrior transaction #" + priorTransactionID + " " + RESTARTED_COLOR + "RESTARTED" + RESET_COLOR + " as transaction #" + transactionID + ", transfer $" + amount + ": " + accountFrom + "->" + accountTo);
+                    System.out.println("\t\tPrior Transaction #" + priorTransactionID + " " + RESTARTED_COLOR + "RESTARTED" + RESET_COLOR + " as Transaction #" + transactionID + ", transfer $" + amount + ": " + accountFrom + "->" + accountTo);
                     //System.out.println("Prior transaction #" + priorTransactionID + " restarted as transaction #" + transactionID + ", transfer $" + amount + ": " + accountFrom + "->" + accountTo);
                 }
 

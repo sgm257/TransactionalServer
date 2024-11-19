@@ -1,0 +1,800 @@
+[TransactionServer.TransactionServer] TransactionManager created
+[TransactionServer.TransactionServer] LockManager created
+[TransactionServer.TransactionServer] AccountManager created
+[TransactionServer.TransactionServer] ServerSocket created on port: 23657
+37 Transaction #36 Transaction created
+End loop
+
+51 Transaction #36 [LockManager.setLock]          | lock created, account #4
+35 Transaction #34 Transaction created
+End loop
+
+30 Transaction #31 Transaction created
+End loop
+
+2 Transaction #1 Transaction created
+End loop
+
+36 Transaction #35 Transaction created
+End loop
+
+32 Transaction #32 Transaction created
+End loop
+
+1 Transaction #0 Transaction created
+End loop
+
+34 Transaction #0 Transaction created
+End loop
+
+33 Transaction #22 Transaction created
+End loop
+
+31 Transaction #13 Transaction created
+End loop
+
+29 Transaction #30 Transaction created
+End loop
+
+28 Transaction #29 Transaction created
+End loop
+
+27 Transaction #28 Transaction created
+End loop
+
+26 Transaction #27 Transaction created
+End loop
+
+25 Transaction #26 Transaction created
+End loop
+
+24 Transaction #25 Transaction created
+End loop
+
+23 Transaction #24 Transaction created
+End loop
+
+22 Transaction #23 Transaction created
+End loop
+
+21 Transaction #21 Transaction created
+End loop
+
+20 Transaction #20 Transaction created
+End loop
+
+19 Transaction #19 Transaction created
+End loop
+
+18 Transaction #18 Transaction created
+End loop
+
+17 Transaction #17 Transaction created
+End loop
+
+16 Transaction #16 Transaction created
+End loop
+
+15 Transaction #15 Transaction created
+End loop
+
+14 Transaction #14 Transaction created
+End loop
+
+13 Transaction #12 Transaction created
+End loop
+
+12 Transaction #11 Transaction created
+End loop
+
+11 Transaction #10 Transaction created
+End loop
+
+10 Transaction #9 Transaction created
+End loop
+
+9 Transaction #8 Transaction created
+End loop
+
+8 Transaction #7 Transaction created
+End loop
+
+7 Transaction #6 Transaction created
+End loop
+
+38 Transaction #37 Transaction created
+End loop
+
+4 Transaction #3 Transaction created
+End loop
+
+41 Transaction #40 Transaction created
+End loop
+
+43 Transaction #42 Transaction created
+End loop
+
+44 Transaction #43 Transaction created
+End loop
+
+45 Transaction #44 Transaction created
+End loop
+
+46 Transaction #45 Transaction created
+End loop
+
+47 Transaction #46 Transaction created
+End loop
+
+48 Transaction #47 Transaction created
+End loop
+
+49 Transaction #48 Transaction created
+End loop
+
+50 Transaction #49 Transaction created
+End loop
+
+42 Transaction #41 Transaction created
+End loop
+
+5 Transaction #4 Transaction created
+End loop
+
+39 Transaction #38 Transaction created
+End loop
+
+3 Transaction #2 Transaction created
+End loop
+
+40 Transaction #39 Transaction created
+End loop
+
+52 Transaction #39 [LockManager.setLock]          | lock created, account #0
+53 Transaction #19 [LockManager.setLock]          | lock created, account #3
+54 Transaction #38 [LockManager.setLock]          | lock created, account #9
+55 Transaction #4 [LockManager.setLock]          | lock created, account #7
+56 Transaction #49 [LockManager.setLock]          | lock created, account #2
+57 Transaction #48 [LockManager.setLock]          | lock created, account #5
+58 Transaction #47 [LockManager.setLock]          | lock created, account #6
+59 Transaction #11 [LockManager.setLock]          | lock created, account #8
+60 Transaction #12 [LockManager.setLock]          | lock created, account #1
+6 Transaction #5 Transaction created
+End loop
+
+61 Transaction #19 [Lock.acquire]                 | try to set READ_LOCK on account #3
+71 Transaction #19 adding lock
+72 Transaction #1 [Lock.acquire]                 | try to set READ_LOCK on account #3
+73 Transaction #1 adding lock
+74 Transaction #1 Processing read request
+End loop
+
+75 Transaction #32 [Lock.acquire]                 | try to set READ_LOCK on account #3
+76 Transaction #32 adding lock
+77 Transaction #32 Processing read request
+End loop
+
+78 Transaction #16 [Lock.acquire]                 | try to set READ_LOCK on account #3
+79 Transaction #16 adding lock
+80 Transaction #16 Processing read request
+End loop
+
+81 Transaction #8 [Lock.acquire]                 | try to set READ_LOCK on account #3
+82 Transaction #8 adding lock
+83 Transaction #8 Processing read request
+End loop
+
+84 Transaction #37 [Lock.acquire]                 | try to set READ_LOCK on account #3
+85 Transaction #37 adding lock
+86 Transaction #37 Processing read request
+End loop
+
+70 Transaction #48 [Lock.acquire]                 | try to set READ_LOCK on account #5
+69 Transaction #14 [Lock.acquire]                 | try to set READ_LOCK on account #0
+88 Transaction #14 adding lock
+89 Transaction #14 Processing read request
+End loop
+
+68 Transaction #12 [Lock.acquire]                 | try to set READ_LOCK on account #1
+90 Transaction #12 adding lock
+91 Transaction #12 Processing read request
+End loop
+
+92 Transaction #0 [Lock.acquire]                 | try to set READ_LOCK on account #1
+93 Transaction #0 adding lock
+94 Transaction #0 Processing read request
+End loop
+
+95 Transaction #22 [Lock.acquire]                 | try to set READ_LOCK on account #1
+96 Transaction #22 adding lock
+97 Transaction #22 Processing read request
+End loop
+
+98 Transaction #0 [Lock.acquire]                 | try to set WRITE_LOCK on account #1
+99 Transaction #14 [Lock.acquire]                 | try to set WRITE_LOCK on account #0
+100 Transaction #48 adding lock
+101 Transaction #29 [Lock.acquire]                 | try to set READ_LOCK on account #5
+102 Transaction #29 adding lock
+103 Transaction #29 Processing read request
+End loop
+
+104 Transaction #27 [Lock.acquire]                 | try to set READ_LOCK on account #5
+105 Transaction #27 adding lock
+106 Transaction #27 Processing read request
+End loop
+
+107 Transaction #20 [Lock.acquire]                 | try to set READ_LOCK on account #5
+108 Transaction #20 adding lock
+109 Transaction #20 Processing read request
+End loop
+
+110 Transaction #27 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+111 Transaction #48 Processing read request
+End loop
+
+67 Transaction #11 [Lock.acquire]                 | try to set READ_LOCK on account #8
+112 Transaction #11 adding lock
+113 Transaction #35 [Lock.acquire]                 | try to set READ_LOCK on account #8
+114 Transaction #35 adding lock
+115 Transaction #35 Processing read request
+End loop
+
+116 Transaction #13 [Lock.acquire]                 | try to set READ_LOCK on account #8
+117 Transaction #13 adding lock
+118 Transaction #13 Processing read request
+End loop
+
+119 Transaction #26 [Lock.acquire]                 | try to set READ_LOCK on account #8
+120 Transaction #26 adding lock
+121 Transaction #26 Processing read request
+End loop
+
+122 Transaction #24 [Lock.acquire]                 | try to set READ_LOCK on account #8
+123 Transaction #24 adding lock
+124 Transaction #24 Processing read request
+End loop
+
+125 Transaction #18 [Lock.acquire]                 | try to set READ_LOCK on account #8
+126 Transaction #18 adding lock
+127 Transaction #18 Processing read request
+End loop
+
+128 Transaction #26 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+129 Transaction #11 Processing read request
+End loop
+
+66 Transaction #4 [Lock.acquire]                 | try to set READ_LOCK on account #7
+131 Transaction #4 adding lock
+132 Transaction #9 [Lock.acquire]                 | try to set READ_LOCK on account #7
+133 Transaction #9 adding lock
+134 Transaction #9 Processing read request
+End loop
+
+135 Transaction #40 [Lock.acquire]                 | try to set READ_LOCK on account #7
+136 Transaction #40 adding lock
+137 Transaction #40 Processing read request
+End loop
+
+138 Transaction #43 [Lock.acquire]                 | try to set READ_LOCK on account #7
+139 Transaction #43 adding lock
+140 Transaction #43 Processing read request
+End loop
+
+141 Transaction #40 [Lock.acquire]                 | try to set WRITE_LOCK on account #7
+142 Transaction #4 Processing read request
+End loop
+
+65 Transaction #47 [Lock.acquire]                 | try to set READ_LOCK on account #6
+143 Transaction #47 adding lock
+144 Transaction #0 [Lock.acquire]                 | try to set READ_LOCK on account #6
+145 Transaction #0 adding lock
+146 Transaction #0 Processing read request
+End loop
+
+147 Transaction #45 [Lock.acquire]                 | try to set READ_LOCK on account #6
+148 Transaction #45 adding lock
+149 Transaction #45 Processing read request
+End loop
+
+150 Transaction #0 [Lock.acquire]                 | try to set WRITE_LOCK on account #6
+151 Transaction #47 Processing read request
+64 Transaction #38 [Lock.acquire]                 | try to set READ_LOCK on account #9
+152 Transaction #38 adding lock
+153 Transaction #34 [Lock.acquire]                 | try to set READ_LOCK on account #9
+154 Transaction #34 adding lock
+155 Transaction #34 Processing read request
+End loop
+
+156 Transaction #31 [Lock.acquire]                 | try to set READ_LOCK on account #9
+157 Transaction #31 adding lock
+158 Transaction #31 Processing read request
+End loop
+
+159 Transaction #25 [Lock.acquire]                 | try to set READ_LOCK on account #9
+160 Transaction #25 adding lock
+161 Transaction #25 Processing read request
+End loop
+
+162 Transaction #31 [Lock.acquire]                 | try to set WRITE_LOCK on account #9
+End loop
+
+63 Transaction #49 [Lock.acquire]                 | try to set READ_LOCK on account #2
+164 Transaction #49 adding lock
+165 Transaction #28 [Lock.acquire]                 | try to set READ_LOCK on account #2
+166 Transaction #28 adding lock
+167 Transaction #28 Processing read request
+End loop
+
+168 Transaction #7 [Lock.acquire]                 | try to set READ_LOCK on account #2
+169 Transaction #7 adding lock
+170 Transaction #7 Processing read request
+End loop
+
+171 Transaction #46 [Lock.acquire]                 | try to set READ_LOCK on account #2
+172 Transaction #46 adding lock
+173 Transaction #46 Processing read request
+End loop
+
+174 Transaction #7 [Lock.acquire]                 | try to set WRITE_LOCK on account #2
+62 Transaction #36 [Lock.acquire]                 | try to set READ_LOCK on account #4
+176 Transaction #36 adding lock
+177 Transaction #23 [Lock.acquire]                 | try to set READ_LOCK on account #4
+178 Transaction #23 adding lock
+179 Transaction #23 Processing read request
+End loop
+
+180 Transaction #21 [Lock.acquire]                 | try to set READ_LOCK on account #4
+181 Transaction #21 adding lock
+182 Transaction #21 Processing read request
+End loop
+
+183 Transaction #17 [Lock.acquire]                 | try to set READ_LOCK on account #4
+184 Transaction #17 adding lock
+185 Transaction #17 Processing read request
+End loop
+
+186 Transaction #10 [Lock.acquire]                 | try to set READ_LOCK on account #4
+187 Transaction #10 adding lock
+188 Transaction #10 Processing read request
+End loop
+
+189 Transaction #6 [Lock.acquire]                 | try to set READ_LOCK on account #4
+190 Transaction #6 adding lock
+191 Transaction #6 Processing read request
+End loop
+
+192 Transaction #44 [Lock.acquire]                 | try to set READ_LOCK on account #4
+193 Transaction #44 adding lock
+194 Transaction #44 Processing read request
+End loop
+
+195 Transaction #41 [Lock.acquire]                 | try to set READ_LOCK on account #4
+196 Transaction #41 adding lock
+197 Transaction #41 Processing read request
+End loop
+
+198 Transaction #17 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+175 Transaction #49 Processing read request
+End loop
+
+163 Transaction #38 Processing read request
+End loop
+
+130 Transaction #19 Processing read request
+87 Transaction #2 [Lock.acquire]                 | try to set READ_LOCK on account #3
+200 Transaction #2 adding lock
+201 Transaction #2 Processing read request
+End loop
+
+End loop
+
+199 Transaction #36 Processing read request
+202 Transaction #3 [Lock.acquire]                 | try to set READ_LOCK on account #3
+203 Transaction #3 adding lock
+204 Transaction #3 Processing read request
+End loop
+
+205 Transaction #42 [Lock.acquire]                 | try to set READ_LOCK on account #3
+206 Transaction #42 adding lock
+207 Transaction #42 Processing read request
+End loop
+
+208 Transaction #3 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+End loop
+
+
+Transaction #0 aborting transaction
+209 Transaction #22 [Lock.acquire]                 | try to set WRITE_LOCK on account #1
+
+Transaction #22 aborting transaction
+210 Transaction #22 Aborted
+211 Transaction #12 [Lock.acquire]                 | try to set WRITE_LOCK on account #1
+
+Transaction #12 aborting transaction
+212 Transaction #12 Aborted
+213 Transaction #0 Aborted
+
+Transaction #0 aborting transaction
+214 Transaction #0 Aborted
+
+Transaction #31 aborting transaction
+215 Transaction #31 Aborted
+216 Transaction #47 [Lock.acquire]                 | try to set WRITE_LOCK on account #6
+
+Transaction #47 aborting transaction
+218 Transaction #47 Aborted
+219 Transaction #45 [Lock.acquire]                 | try to set WRITE_LOCK on account #6
+
+Transaction #45 aborting transaction
+220 Transaction #45 Aborted
+
+Transaction #27 aborting transaction
+221 Transaction #27 Aborted
+222 Transaction #48 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+
+Transaction #48 aborting transaction
+223 Transaction #48 Aborted
+224 Transaction #20 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+
+Transaction #20 aborting transaction
+225 Transaction #20 Aborted
+226 Transaction #29 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+
+Transaction #29 aborting transaction
+227 Transaction #29 Aborted
+
+Transaction #26 aborting transaction
+228 Transaction #11 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+
+Transaction #11 aborting transaction
+229 Transaction #11 Aborted
+230 Transaction #18 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+
+Transaction #18 aborting transaction
+231 Transaction #18 Aborted
+232 Transaction #24 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+
+Transaction #24 aborting transaction
+233 Transaction #24 Aborted
+234 Transaction #35 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+
+Transaction #35 aborting transaction
+235 Transaction #35 Aborted
+236 Transaction #13 [Lock.acquire]                 | try to set WRITE_LOCK on account #8
+
+Transaction #13 aborting transaction
+237 Transaction #13 Aborted
+238 Transaction #26 Aborted
+
+Transaction #3 aborting transaction
+239 Transaction #19 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #19 aborting transaction
+240 Transaction #19 Aborted
+241 Transaction #2 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #2 aborting transaction
+242 Transaction #2 Aborted
+243 Transaction #37 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #37 aborting transaction
+244 Transaction #37 Aborted
+245 Transaction #16 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #16 aborting transaction
+246 Transaction #16 Aborted
+248 Transaction #3 Aborted
+
+Transaction #40 aborting transaction
+
+Transaction #17 aborting transaction
+249 Transaction #17 Aborted
+217 Transaction #38 [Lock.acquire]                 | try to set WRITE_LOCK on account #9
+
+Transaction #38 aborting transaction
+250 Transaction #38 Aborted
+251 Transaction #25 [Lock.acquire]                 | try to set WRITE_LOCK on account #9
+
+Transaction #25 aborting transaction
+252 Transaction #25 Aborted
+253 Transaction #34 [Lock.acquire]                 | try to set WRITE_LOCK on account #9
+
+Transaction #34 aborting transaction
+254 Transaction #34 Aborted
+
+Transaction #7 aborting transaction
+255 Transaction #7 Aborted
+256 Transaction #49 [Lock.acquire]                 | try to set WRITE_LOCK on account #2
+
+Transaction #49 aborting transaction
+257 Transaction #49 Aborted
+258 Transaction #46 [Lock.acquire]                 | try to set WRITE_LOCK on account #2
+
+Transaction #46 aborting transaction
+259 Transaction #46 Aborted
+260 Transaction #28 [Lock.acquire]                 | try to set WRITE_LOCK on account #2
+
+Transaction #28 aborting transaction
+261 Transaction #28 Aborted
+262 Transaction #36 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #36 aborting transaction
+263 Transaction #36 Aborted
+264 Transaction #41 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #41 aborting transaction
+265 Transaction #41 Aborted
+266 Transaction #21 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #21 aborting transaction
+267 Transaction #21 Aborted
+268 Transaction #10 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #10 aborting transaction
+269 Transaction #10 Aborted
+270 Transaction #23 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #23 aborting transaction
+271 Transaction #23 Aborted
+272 Transaction #44 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #44 aborting transaction
+273 Transaction #44 Aborted
+274 Transaction #6 [Lock.acquire]                 | try to set WRITE_LOCK on account #4
+
+Transaction #6 aborting transaction
+275 Transaction #6 Aborted
+247 Transaction #1 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #1 aborting transaction
+276 Transaction #1 Aborted
+277 Transaction #8 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #8 aborting transaction
+278 Transaction #8 Aborted
+279 Transaction #32 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #32 aborting transaction
+280 Transaction #32 Aborted
+281 Transaction #42 [Lock.acquire]                 | try to set WRITE_LOCK on account #3
+
+Transaction #42 aborting transaction
+282 Transaction #42 Aborted
+283 Transaction #4 [Lock.acquire]                 | try to set WRITE_LOCK on account #7
+
+Transaction #4 aborting transaction
+284 Transaction #4 Aborted
+285 Transaction #43 [Lock.acquire]                 | try to set WRITE_LOCK on account #7
+
+Transaction #43 aborting transaction
+286 Transaction #43 Aborted
+287 Transaction #9 [Lock.acquire]                 | try to set WRITE_LOCK on account #7
+
+Transaction #9 aborting transaction
+288 Transaction #9 Aborted
+289 Transaction #40 Aborted
+290 Transaction #14 [Transaction.addBeforeImage]   | set before image for account #0 to $10
+291 Transaction #14 upgrading lock
+292 Transaction #5 [Lock.acquire]                 | try to set READ_LOCK on account #0
+
+Transaction #5 aborting transaction
+293 Transaction #5 Aborted
+294 Transaction #30 [Lock.acquire]                 | try to set READ_LOCK on account #0
+
+Transaction #30 aborting transaction
+295 Transaction #30 Aborted
+296 Transaction #15 [Lock.acquire]                 | try to set READ_LOCK on account #0
+
+Transaction #15 aborting transaction
+297 Transaction #15 Aborted
+298 Transaction #39 [Lock.acquire]                 | try to set READ_LOCK on account #0
+
+Transaction #39 aborting transaction
+299 Transaction #39 Aborted
+300 Transaction #14 Processing write request
+End loop
+
+301 Transaction #22 [LockManager.unLock]           | release READ_LOCK, account #1
+302 Transaction #40 [LockManager.unLock]           | release READ_LOCK, account #7
+303 Transaction #9 [LockManager.unLock]           | release READ_LOCK, account #7
+304 Transaction #43 [LockManager.unLock]           | release READ_LOCK, account #7
+305 Transaction #4 [LockManager.unLock]           | release READ_LOCK, account #7
+306 Transaction #42 [LockManager.unLock]           | release READ_LOCK, account #3
+307 Transaction #32 [LockManager.unLock]           | release READ_LOCK, account #3
+308 Transaction #8 [LockManager.unLock]           | release READ_LOCK, account #3
+309 Transaction #1 [LockManager.unLock]           | release READ_LOCK, account #3
+310 Transaction #6 [LockManager.unLock]           | release READ_LOCK, account #4
+311 Transaction #44 [LockManager.unLock]           | release READ_LOCK, account #4
+312 Transaction #23 [LockManager.unLock]           | release READ_LOCK, account #4
+313 Transaction #10 [LockManager.unLock]           | release READ_LOCK, account #4
+314 Transaction #21 [LockManager.unLock]           | release READ_LOCK, account #4
+315 Transaction #41 [LockManager.unLock]           | release READ_LOCK, account #4
+316 Transaction #36 [LockManager.unLock]           | release READ_LOCK, account #4
+317 Transaction #28 [LockManager.unLock]           | release READ_LOCK, account #2
+318 Transaction #46 [LockManager.unLock]           | release READ_LOCK, account #2
+319 Transaction #49 [LockManager.unLock]           | release READ_LOCK, account #2
+320 Transaction #7 [LockManager.unLock]           | release READ_LOCK, account #2
+321 Transaction #34 [LockManager.unLock]           | release READ_LOCK, account #9
+322 Transaction #25 [LockManager.unLock]           | release READ_LOCK, account #9
+323 Transaction #38 [LockManager.unLock]           | release READ_LOCK, account #9
+324 Transaction #17 [LockManager.unLock]           | release READ_LOCK, account #4
+325 Transaction #3 [LockManager.unLock]           | release READ_LOCK, account #3
+326 Transaction #16 [LockManager.unLock]           | release READ_LOCK, account #3
+327 Transaction #37 [LockManager.unLock]           | release READ_LOCK, account #3
+328 Transaction #2 [LockManager.unLock]           | release READ_LOCK, account #3
+329 Transaction #19 [LockManager.unLock]           | release READ_LOCK, account #3
+330 Transaction #26 [LockManager.unLock]           | release READ_LOCK, account #8
+331 Transaction #13 [LockManager.unLock]           | release READ_LOCK, account #8
+332 Transaction #35 [LockManager.unLock]           | release READ_LOCK, account #8
+333 Transaction #24 [LockManager.unLock]           | release READ_LOCK, account #8
+334 Transaction #18 [LockManager.unLock]           | release READ_LOCK, account #8
+335 Transaction #11 [LockManager.unLock]           | release READ_LOCK, account #8
+336 Transaction #29 [LockManager.unLock]           | release READ_LOCK, account #5
+337 Transaction #20 [LockManager.unLock]           | release READ_LOCK, account #5
+338 Transaction #48 [LockManager.unLock]           | release READ_LOCK, account #5
+339 Transaction #27 [LockManager.unLock]           | release READ_LOCK, account #5
+340 Transaction #45 [LockManager.unLock]           | release READ_LOCK, account #6
+341 Transaction #47 [LockManager.unLock]           | release READ_LOCK, account #6
+342 Transaction #31 [LockManager.unLock]           | release READ_LOCK, account #9
+343 Transaction #0 [LockManager.unLock]           | release READ_LOCK, account #6
+344 Transaction #0 [LockManager.unLock]           | release READ_LOCK, account #1
+345 Transaction #12 [LockManager.unLock]           | release READ_LOCK, account #1
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+End loop
+
+346 Transaction #14 [Lock.acquire]                 | try to set READ_LOCK on account #5
+347 Transaction #14 adding lock
+348 Transaction #14 Processing read request
+End loop
+
+End loop
+
+349 Transaction #50 Transaction created
+End loop
+
+350 Transaction #14 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+351 Transaction #14 [Transaction.addBeforeImage]   | set before image for account #5 to $10
+352 Transaction #14 upgrading lock
+353 Transaction #14 Processing write request
+End loop
+
+354 Transaction #14 [LockManager.unLock]           | release WRITE_LOCK, account #0
+355 Transaction #14 [LockManager.unLock]           | release WRITE_LOCK, account #5
+356 Transaction #14 Closed
+357 Transaction #14 trying to send close message to client
+358 Transaction #14 sent closed message to client
+End loop
+
+[TransactionManagerWorker.run] Client shut down, shutting down as well ...
+359 Transaction #51 Transaction created
+End loop
+
+[TransactionManagerWorker.run] Client shut down, shutting down as well ...
+[TransactionManagerWorker.run] Client shut down, shutting down as well ...
+
+
+======================================= COMMITTED TRANSACTIONS INFORMATION =======================================
+
+14 Transaction created
+69 [Lock.acquire]                 | try to set READ_LOCK on account #0
+88 adding lock
+89 Processing read request
+99 [Lock.acquire]                 | try to set WRITE_LOCK on account #0
+290 [Transaction.addBeforeImage]   | set before image for account #0 to $10
+291 upgrading lock
+300 Processing write request
+346 [Lock.acquire]                 | try to set READ_LOCK on account #5
+347 adding lock
+348 Processing read request
+350 [Lock.acquire]                 | try to set WRITE_LOCK on account #5
+351 [Transaction.addBeforeImage]   | set before image for account #5 to $10
+352 upgrading lock
+353 Processing write request
+354 [LockManager.unLock]           | release WRITE_LOCK, account #0
+355 [LockManager.unLock]           | release WRITE_LOCK, account #5
+356 Closed
+357 trying to send close message to client
+358 sent closed message to client
+
+
+======================================= BRANCH TOTAL =======================================
+---> $100
+
+
+======================================= ACCOUNT BALANCES =======================================
+0 10 10 10 10 20 10 10 10 10 
+
+

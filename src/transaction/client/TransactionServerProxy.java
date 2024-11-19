@@ -4,9 +4,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import transaction.comm.Message;
 import transaction.comm.MessageTypes;
 import transaction.server.lock.TransactionAbortedException;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ConnectException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
 
 /**
  * This class represents the proxy that acts on behalf of the transaction server on the client side.
@@ -46,11 +56,25 @@ public class TransactionServerProxy implements MessageTypes{
 
         // ...
 
-        try
+        // TODO maybe stream creation is failing here for some reason? This is where the client breaks
+        // i thought the client was breaking because the serve shutdown but idk maybe not
+        try 
         {
+            // Clean up any previous connection
+            if (dbConnection != null && !dbConnection.isClosed()) {
+                dbConnection.close();
+            }
+            if (writeToNet != null) {
+                writeToNet.close();
+            }
+            if (readFromNet != null) {
+                readFromNet.close();
+            }
+
             // make connection to server
             dbConnection = new Socket(host, port);
             writeToNet = new ObjectOutputStream(dbConnection.getOutputStream());
+            writeToNet.flush();
             readFromNet = new ObjectInputStream(dbConnection.getInputStream());
 
             // make message
@@ -63,12 +87,33 @@ public class TransactionServerProxy implements MessageTypes{
             message = (Message)readFromNet.readObject();
 
             transactionID = (Integer)message.getContent();
-            //transactionID++;
         }
+        // catch (ConnectException e)
+        // {
+        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
+        //     System.out.println("Connection refused: Unable to reach server at " + host + ":" + port);
+        //     System.out.println("Please ensure the server is running and accessible.");
+        //     e.printStackTrace();
+        // } 
+        // catch (SocketTimeoutException e)
+        // {
+        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
+        //     System.out.println("Connection timed out: Server did not respond within the specified timeout.");
+        //     e.printStackTrace();
+        // } 
+        // catch (IOException e)
+        // {
+        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
+        //     System.out.println("I/O error occurred when trying to connect to the server.");
+        //     e.printStackTrace();
+        // }
         catch(Exception e)
         {
             // cry about it I guess
-            System.out.println("\n[openTransaction] Transaction #" + transactionID + " failed to open streams or send message or receive message");
+            //System.out.println("\n[openTransaction] Transaction #" + transactionID + " failed to open streams or send message or receive message");
+
+            System.out.println("[openTransaction] Failed: " + e.getMessage());
+            e.printStackTrace();
             System.exit(0); // TODO remove, temporarily here for testing purposes 
         }
         
@@ -94,13 +139,17 @@ public class TransactionServerProxy implements MessageTypes{
             // send message
             writeToNet.writeObject(message);
 
-            System.out.println("\nTransaction #" + transactionID + " sent message to server"); 
-
             // receive status response
-            returnStatus = (int)readFromNet.readObject();
+            message = (Message)readFromNet.readObject();
+
+            returnStatus = message.getType();
 
             // close streams
+            writeToNet.close();
+            readFromNet.close();
             dbConnection.close();
+
+            Thread.sleep(1000);
 
             System.out.println("\nTransaction #" + transactionID + " closed connection");
         }
@@ -147,9 +196,24 @@ public class TransactionServerProxy implements MessageTypes{
         }
         else
         {
+            try
+            {
+                // close streams
+                if (writeToNet != null) writeToNet.close();
+                if (readFromNet != null) readFromNet.close();
+                if (dbConnection != null) dbConnection.close();
+
+                Thread.sleep(1000);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Failed to close streams in case of abortion");
+            }
+
             throw new TransactionAbortedException();
         }
     }
+
 
     
 /**
@@ -180,6 +244,21 @@ public class TransactionServerProxy implements MessageTypes{
         if(message.getType() == TRANSACTION_ABORTED)
         {
             // here we have an ABORT_TRANSACTION
+
+            try
+            {
+                // close streams
+                if (writeToNet != null) writeToNet.close();
+                if (readFromNet != null) readFromNet.close();
+                if (dbConnection != null) dbConnection.close();
+
+                Thread.sleep(1000);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Failed to close streams in case of abortion");
+            }            
+
             throw new TransactionAbortedException();
         }
     }
