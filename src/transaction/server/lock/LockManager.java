@@ -62,11 +62,6 @@ public class LockManager implements LockTypes
          // ---------------------------------
             currentLock.release(transaction);
          // ---------------------------------
-
-            //if (/* lock is empty and lock requestors  is empty */) {
-                // remove the lock as it is not needed any more
-                // not implemented
-            //}
         }
     }
     

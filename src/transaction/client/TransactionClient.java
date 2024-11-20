@@ -143,16 +143,6 @@ public class TransactionClient implements Runnable {
             accountFrom = (int) Math.floor(Math.random() * numberAccounts);
             accountTo = (int) Math.floor(Math.random() * numberAccounts);
             amount = (int) Math.ceil(Math.random() * initialBalance);
-
-            // give the runtime environment a bit of wiggle room to get going,
-            // otherwise you get a whole lot of broken pipes issues ...
-            /*
-            try {
-            Thread.sleep((int) Math.floor(Math.random() * 1000));
-            } catch (InterruptedException ex) {
-            Logger.getLogger(TransactionClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
             
             // running in a loop, in case the same transaction needs to be restarted
             do {

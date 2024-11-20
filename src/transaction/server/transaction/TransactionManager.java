@@ -118,16 +118,12 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                 // reading message
                 try {
                     message = (Message) readFromNet.readObject();
-                } catch (IOException | ClassNotFoundException e) { //TODO server is shutting down here... what exception is it getting??
+                } catch (IOException | ClassNotFoundException e) {
                     System.out.println("[TransactionManagerWorker.run] Client shut down, shutting down as well ...");
 
-                    // e.printStackTrace();
-  
-                    // // Prints what exception has been thrown 
+                    // Prints what exception has been thrown 
                     System.out.println(e);
 
-                    // bail out
-                    //TransactionServer.shutDown();
                     return;
                 }
 
@@ -137,8 +133,6 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                     case OPEN_TRANSACTION:
                     // -------------------------------------------------------------------------------------------
 
-                        // ...
-
                         // create a transaction based on the info received from the message
                         transaction = new Transaction(transactionIdCounter);
 
@@ -147,7 +141,6 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                         // add transaction to running transactions for logging purposes
                         runningTransactions.add(transaction);
 
-                        // TODO send transaction ID back to client yes
                         try
                         {
                             // send read request response back to client
@@ -166,8 +159,6 @@ public class TransactionManager implements MessageTypes, TerminalColors {
                     // -------------------------------------------------------------------------------------------
                     case CLOSE_TRANSACTION:
                     // -------------------------------------------------------------------------------------------
-
-                        // ...
 
                         // use lock manager to release all locks
                         TransactionServer.lockManager.unLock(transaction);
@@ -343,8 +334,6 @@ public class TransactionManager implements MessageTypes, TerminalColors {
 
                         System.out.println("[TransactionManagerWorker.run] Warning: Message type not implemented");
                 }
-
-                System.out.println("End loop\n");
             }
         }
     }

@@ -145,22 +145,6 @@ public class TransactionServer implements Runnable
         System.out.print(committedTransactionsLogs);
         //*/
         
-
-        /*
-        System.out.println("\n\n======================================= ABORTED TRANSACTIONS INFORMATION =======================================");
-
-        StringBuffer abortedTransactionsLogs = new StringBuffer();
-        Iterator<Transaction> abortedTransactionsIterator = TransactionServer.transactionManager.getAbortedTransactions().iterator();
-        Transaction abortedTransaction;
-
-        while (abortedTransactionsIterator.hasNext())
-        {
-            abortedTransaction = abortedTransactionsIterator.next();
-            abortedTransactionsLogs.append(abortedTransaction.getLog()).append("\n");
-        }
-
-        System.out.print(abortedTransactionsLogs);
-        */
         
         System.out.println("\n\n======================================= BRANCH TOTAL =======================================");
 

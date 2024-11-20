@@ -53,11 +53,6 @@ public class TransactionServerProxy implements MessageTypes{
      * @return the transaction ID 
      */
     public int openTransaction() {
-
-        // ...
-
-        // TODO maybe stream creation is failing here for some reason? This is where the client breaks
-        // i thought the client was breaking because the serve shutdown but idk maybe not
         try 
         {
             // Clean up any previous connection
@@ -88,33 +83,11 @@ public class TransactionServerProxy implements MessageTypes{
 
             transactionID = (Integer)message.getContent();
         }
-        // catch (ConnectException e)
-        // {
-        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
-        //     System.out.println("Connection refused: Unable to reach server at " + host + ":" + port);
-        //     System.out.println("Please ensure the server is running and accessible.");
-        //     e.printStackTrace();
-        // } 
-        // catch (SocketTimeoutException e)
-        // {
-        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
-        //     System.out.println("Connection timed out: Server did not respond within the specified timeout.");
-        //     e.printStackTrace();
-        // } 
-        // catch (IOException e)
-        // {
-        //     System.out.print("\n[openTransaction] Transaction #" + transactionID + " ");
-        //     System.out.println("I/O error occurred when trying to connect to the server.");
-        //     e.printStackTrace();
-        // }
         catch(Exception e)
         {
-            // cry about it I guess
-            //System.out.println("\n[openTransaction] Transaction #" + transactionID + " failed to open streams or send message or receive message");
-
             System.out.println("[openTransaction] Failed: " + e.getMessage());
             e.printStackTrace();
-            System.exit(0); // TODO remove, temporarily here for testing purposes 
+            System.exit(0);
         }
         
         return transactionID;
@@ -127,8 +100,6 @@ public class TransactionServerProxy implements MessageTypes{
      * @return the status, i.e. either TRANSACTION_COMMITTED or TRANSACTION_ABORTED
      */
     public int closeTransaction() {
-        
-        // ...
         int returnStatus = -1;
 
         try
@@ -228,7 +199,6 @@ public class TransactionServerProxy implements MessageTypes{
         Object[] content = new Object[]{accountNumber, amount};
         Message message = new Message(WRITE_REQUEST, content);
 
-        // ...
         try
         {
             // send message to server and receive response
